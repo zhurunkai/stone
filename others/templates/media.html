@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>medio</title>
+
+
+  <link rel="stylesheet" href="{% static 'css/media.css' %}">
+
+</head>
+<script src="{% static 'init.js' %}"></script>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+</style>
+
+<body>
+
+  <!--logo-->
+  <div class="big-bg">
+
+    <textarea id="text" class="textarea" cols="30" rows="10">
+    </textarea>
+<div id="content">
+
+
+  <div style="width: 100vw;height: 90px;">
+    <div class="comments1 show">
+      <img src="{% static 'img/user.JPG' %}" width="70" height="70"
+        style="border-radius: 80px; bottom:5px;position: absolute;left: 10px;">
+      <span class="user-name">
+        萝卜鱼
+      </span>
+      <img class="close" src="{% static 'img/close.png' %}" width="20">
+      <span class="text">
+        <p>远古石村，许你千年的魅力!</p>
+      </span>
+    </div>
+  </div>
+
+
+</div>
+    <button type="button" class="button">
+      <p style="font-size: 16px;color: white;">发送</p>
+    </button>
+
+
+
+    <div class="logo" style="position: absolute;left: 0;top: 0;">
+      <a href="{% url 'home:index' %}"><img src="{% static 'img/logo.png' %}" class="logo-img" style="transform: scale(0.9,0.9) translate(40px,0px)" alt="logo"></a>
+      <div>
+        <video style=" outline:none;" width=100%; controls src="{% static 'stone_media.mp4' %}"></video>
+      </div>
+    </div>
+
+  </div>
+</body>
+<script>
+  document.getElementById("text").value = "\n  "
+  document.getElementsByClassName("button")[0].addEventListener("click", function () {
+    document.getElementById("content").innerHTML = `
+      <div style="width: 100vw;height: 90px;">
+        <div class="comments1 show">
+          <img src="https://stone-1258976754.cos.ap-shanghai.myqcloud.com/zrk.jpg" width="70" height="70"
+            style="border-radius: 80px; bottom:5px;position: absolute;left: 10px;">
+          <span class="user-name">
+            K
+          </span>
+          <img class="close" src="{% static 'img/close.png' %}" width="20">
+          <span class="text">
+            <p>${document.getElementById("text").value}</p>
+          </span>
+        </div>
+      </div>
+    ` + document.getElementById("content").innerHTML
+    document.getElementById("text").value = "\n  "
+  })
+
+</script>
+
+</html>

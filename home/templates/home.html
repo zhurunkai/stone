@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>原古石村，许你千年</title>
+  <link rel="stylesheet" href="{% static 'css/font.css' %}">
+  <!-- <link rel="stylesheet" href="./css/sideNav.css"> -->
+  <link rel="stylesheet" href="{% static 'Public_Assets/css/sideNav.css' %}">
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<script src="{% static 'js/init.js' %}"></script>
+<body>
+  <header>
+    <a href="#"><img src="{% static 'Public_Assets/img/logo.png' %}" style="position: absolute; left: 47px; top: -10px; transform: scale(0.63,0.63)" alt="logo"></a>
+  </header>
+  <article class="stone-article">
+    <a href="{% url 'others:media' %}">
+      <img src="{% static 'img/article.png' %}" alt="许家山石头村" style="transform: scale(0.75,0.75) translate(-120px,160px)">
+    </a>
+  </article>
+  <button id="menu">MENU</button>
+  <aside style="transform: translateX( 208px )" class="stone-side right">
+    <button class="btn-side fewer ">
+      <span class="hamb-top"></span>
+      <span class="hamb-middle"></span>
+      <span class="hamb-bottom"></span>
+    </button>
+    <nav class="stone-nav">
+      <ul class="stone-nav-list">
+        <li><a id="home" href="#">许家山石村</a></li>
+        {% if not userinfo == 0 %}
+          <li><a id="user" href="{% url 'others:user2' %}"> 欢迎您 {{ userinfo.nickname }}</a></li>
+          {% else %}
+          <li><a id="user" href="{% url 'login_signup:login_page' %}">登录/注册</a></li>
+          {% endif %}
+{#          <li><a id="user" href="http://www.baidu.com">登陆</a></li>#}
+        <li><a id="main" href="{% url 'others:about' %}">石村简介</a></li>
+        <li><a id="stone" href="{% url 'others:shimo' %}">石模展示</a></li>
+        <li><a id="main_part" href="{% url 'others:newmain' %}">石村风情</a></li>
+        <li><a id="forum" href="{% url 'posts:list' 1 %}">石村社区</a></li>
+        <li><a id="build" href="{% url 'mystone:indexmystone' %}">我的石村</a></li>
+        <li><a id="help" href="{% url 'others:complain' %}">反馈与建议</a></li>
+      </ul>
+    </nav>
+  </aside>
+  {% if userinfo == 0 %}
+  <iframe id="entry" style="position: fixed;width: 100vw;height: 100vh;top: 0;left: 0;visibility: hidden" src="{% url 'login_signup:login_page' %}" frameborder="0"></iframe>
+{% endif %}
+</body>
+{#{% if user_info %}#}
+{#<script>#}
+{#    window.client = "http://127.0.0.1:8000/login_signup/login_page"#}
+{##}
+{#</script>#}
+{#{% endif %}#}
+<script src="{% static 'Public_Assets/js/home.js' %}"></script>
+</html>

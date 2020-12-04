@@ -1,0 +1,86 @@
+
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+	<meta charset="utf-8" />
+
+	<title>反馈与建议</title>
+	<link rel="stylesheet" href="{% static 'style.css' %}">
+	<link rel="stylesheet" href="{% static 'Public_Assets/css/sideNav.css' %}">
+
+	<!--[if IE]><script>
+
+	$(document).ready(function() { 
+	$("#form_wrap").addClass('hide');
+
+	})
+</script><![endif]-->
+
+</head>
+
+<body style="margin-top: 60px">
+
+	<div id="wrap">
+
+		<h1>投诉与建议</h1>
+
+		<div id='form_wrap'>
+
+			<form action="{% url 'backmanage:advise' %}" method="POST" enctype="multipart/form-data">
+                 {% csrf_token %}
+
+				<p>您好,</p>
+
+				<label for="email">您的建议 : </label>
+
+				<textarea  name="content" value="留言内容" id="message" ></textarea>
+
+				<p>附件</p>	
+
+				<label for="name">选取 </label>
+
+				<input type="file" name="annex" value="" id="file_upload" />
+
+        <br>
+        <br>
+        <br>
+
+				<input type="submit" name ="submit" value="提交" />
+
+			</form>
+
+		</div>
+
+	</div>
+	<aside style="transform: translateX( 208px )" class="stone-side right">
+    <button class="btn-side fewer ">
+      <span class="hamb-top"></span>
+      <span class="hamb-middle"></span>
+      <span class="hamb-bottom"></span>
+    </button>
+    <nav class="stone-nav">
+      <ul class="stone-nav-list">
+        <li><a id="home" href="{% url 'home:index' %}">许家山石村</a></li>
+        <li><a id="user" href="{% url 'login_signup:login_page' %}">登录/注册</a></li>
+        <li><a id="main" href="{% url 'others:about' %}">石村简介</a></li>
+        <li><a id="stone" href="../stone/stone.html">石模展示</a></li>
+        <li><a id="main_part" href="{% url 'others:newmain' %}">石村风情</a></li>
+        <li><a id="forum" href="{% url 'posts:list' 1 %}">石村社区</a></li>
+        <li><a id="build" href="../Minecraft/index.html">我的石村</a></li>
+        <li><a id="help" href="#">反馈与建议</a></li>
+      </ul>
+    </nav>
+  </aside>
+	<iframe id="entry" style="position: fixed;width: 100vw;height: 100vh;top: 0;left: 0;visibility: hidden" src="{% url 'login_signup:login_page' %}" frameborder="0"></iframe>
+<div style="position:fixed;height:90px;width:100%;left:0;bottom:10px"><div class="footer-banner" style="width:728px; margin:0px auto"></div></div>
+
+<!-- <script src="http://www.jq22.com/jquery/1.7.2/jquery.min.js"></script> -->
+<script src="{% static 'Public_Assets/js/jquery.min.js' %}"></script>
+<script src="{% static 'Public_Assets/js/home.js' %}"></script>
+</body>
+
+</html>
