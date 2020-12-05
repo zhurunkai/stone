@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{{ keywords }}的搜索结果</title>
+  <link rel="stylesheet" href="{% static 'src/css/forum-pro.css' %}">
+  <!-- <link rel="stylesheet" href="./src/css/slideBox.css" /> -->
+</head>
+<script src="{% static 'node_modules/jquery/dist/jquery.min.js' %}"></script>
+<!-- <script src="./src/js/jquery.SuperSlide.2.1.3.js"></script> -->
+
+<body>
+  <header class="forum-head">
+    <div class="container">
+      <span class="forum-logo">
+        <a href="{% url 'home:index' %}"><img src="{% static 'src/img/logo.png' %}" alt="logo"></a>
+      </span>
+      <div class="forum-bar">
+        <a href="{% url 'posts:list' 1 %}"><h2>石村社区</h2></a>
+        <ul>
+          <li><a href="{% url 'posts:list' 1 %}">首页</a></li>
+          <li><a href="#">标签</a></li>
+          <li><a href="#">留言板</a></li>
+          <li><a href="#" id="ask-question" class="ask-question">发&nbsp;&nbsp;&nbsp;&nbsp;帖</a></li>
+        </ul>
+      </div>
+      <div class="search">
+        <form action="{% url 'posts:search' %}" method="GET">
+          <input type="text" name="keywords" placeholder="搜索">
+          <button type="submit"><i class="btn-icon seek"></i></button>
+        </form>
+      </div>
+      <div class="register">
+        <ul>
+            {% if user_info == 0 %}
+          <li><a href="{% url 'login_signup:login' %}" class="btn">登&nbsp;&nbsp;录</a></li>
+          <li><a href="{% url 'login_signup:register' %}" class="btn">注&nbsp;&nbsp;册</a></li>
+            {% else %}
+          <li><a href="" class="portrait"><img src="{{ request.session.head }}" alt="portrait">&nbsp;{{ request.session.username }}</a></li>
+            {% endif %}
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <section class="forum-sec">
+    <div class="container">
+      <ul class="ul-inline">
+        <li><a href="#">{{ keywords }}的搜索结果：</a></li>
+      </ul>
+    </div>
+    <span id="forum-sec-vernier" class="vernier"></span>
+  </section>
+
+  <main class="forum-page">
+    <div class="col-8">
+      <div class="forum-questions">
+        <ul>
+          {% for question in search_list %}
+          <li class="forum-user-question">
+            <img src="{{ question.head }}" alt="user">
+            <div class="container">
+              <a href="{% url 'posts:content' question.id %}"><h3 class="question-content">{{ question.title }}</h3></a>
+              <ul class="react-links ul-inline">
+                <li> <i class="react-icon applaud"></i> &nbsp;赞同&nbsp;{{ question.thumbs }}</li>
+                <li> <i class="react-icon comment"></i> &nbsp;评论&nbsp;{{ question.comment_len }}</li>
+                <li> <i class="react-icon view"></i> &nbsp;浏览&nbsp;{{ question.volume }}</li>
+              </ul>
+              <br>
+              <ul class="quest-tags ul-inline">
+                 {% for keys in question.keywords %}
+                <li>{{ keys }}</li>
+                 {% endfor %}
+              </ul>
+              <span class="quest-time">{{ question.time }}</span>
+            </div>
+          </li>
+            {% endfor %}
+
+
+
+        </ul>
+      </div>
+      <nav class="pagination">
+        <ul class="page-list ul-inline">
+          <a href="#">
+            <li> 上一页 </li>
+          </a>
+          <a href="#">
+            <li class="active"> 1 </li>
+          </a>
+          <a href="#">
+            <li> 2 </li>
+          </a>
+          <a href="#">
+            <li> 3 </li>
+          </a>
+          <a href="#">
+            <li> 4 </li>
+          </a>
+          <a href="#">
+            <li> 5 </li>
+          </a>
+          <a href="#">
+            <li> ... </li>
+          </a>
+          <a href="#">
+            <li> 下一页 </li>
+          </a>
+        </ul>
+      </nav>
+    </div>
+    <div class="col-4">
+      <div class="forum-widget-users">
+        <h2> 石村社区贡献榜 </h2>
+        <ul>
+            {% for con in contribution %}
+          <a href="">
+            <li class="widget-user">
+              <img src="{{ con.head }}" alt="user">
+              <div class="user-infor">
+                <h3>{{ con.nickname }}</h3>
+                <h3 style="font-size: 8px">{{ con.personality }}</h3>
+              </div>
+              <span class="widget">{{ con.contribution }}</span>
+            </li>
+          </a>
+            {% endfor %}
+            </li>
+          </a>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <ul class="ul-inline">
+      <li><a href="#" title="">帮助</a></li>
+      <li><a href="#" title="">隐私策略</a></li>
+      <li><a href="#" title="">社区原则</a></li>
+      <li><a href="#" title="">划水政策</a></li>
+      <li><a href="#" title="">我们</a></li>
+      <li><a href="#" title="">论坛</a></li>
+      <li><a href="#" title="">语言</a></li>
+      <li><a href="#" title="">版权相关</a></li>
+    </ul>
+    <p><img src="{% static 'src/img/icon/copyright.png' %}" alt="">&nbsp;版权 2019</p>
+    <img src="{% static 'src/img/logo.png' %}" alt="logo">&nbsp;石村论坛
+  </footer>
+  
+  <div id="question-box" class="question-box" style="display: none;">
+    <div class="overview-edit">
+      <h3>发表帖子</h3>
+      <form action="{% url 'posts:release' %}" method="POST">
+        <input type="text" name="title" required placeholder="标题" autocomplete="off">
+        <input type="text" name="keywords" placeholder="标签：#路线 #旅志" autocomplete="off">
+        <textarea placeholder="描述..." name="content" ></textarea>
+        <button type="submit" id="save">提 交</button>
+        <button type="submit" id="cancel">取 消</button>
+      </form>
+      <a href="#" title="关闭" id="close-box" class="close-box"><i class="la la-close"></i></a>
+    </div>
+  </div>
+
+</body>
+<script>
+  $(document).ready(function () {
+
+    // 二级导航栏初始化
+    $(".forum-sec .container ul li")[0].click(); 
+
+    // 发帖相关
+    $("#ask-question").click(function(){
+      $("#question-box").fadeIn();
+    })
+    $("#close-box").click(function(){
+      $("#question-box").fadeOut("fast");
+    })
+    $("#cancel").click(function(){
+      $("#question-box").fadeOut("fast");
+    })
+  })
+
+  function refreshPages(index) {
+
+  }
+
+  function moveVernier(width, left, name) { //移动二级导航游标
+
+    let vernier = $(`${name?name:"#forum-sec-vernier"}`)
+
+    vernier.width(width)
+    vernier.css("left", left)
+  }
+
+  $(".forum-sec .container ul li").each(function (index) { //二级导航点击事件绑定
+
+    this.addEventListener("click", function (e) {
+
+      e = $(e.target)
+
+      let width = e.width()
+      let left = e.offset().left
+
+      moveVernier(width, left);
+      refreshPages(index);
+    })
+  })
+</script>
+
+</html>

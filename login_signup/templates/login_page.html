@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>login</title>
+  <link rel="stylesheet" href="{% static 'css/entry.css' %}">
+  <link rel="stylesheet" href="{% static 'css/font.css' %}">
+  <script src="{% static 'js/securityCode.js' %}"></script>
+</head>
+<script src="{% static 'js/init.js' %}"></script>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    outline: none;
+  }
+
+  #tel {
+    padding-left: 10%;
+    background-image: url("{% static 'icon/tel.png' %}")
+  }
+
+  #verifyCode {
+    padding-left: 10%;
+    background-image: url("{% static 'icon/code.png' %}")
+  }
+
+  #password {
+    padding-left: 10%;
+    background-image: url("{% static 'icon/ps.png' %}")
+  }
+</style>
+
+<body>
+  <form class="stone-form-entry"  action="{% url 'login_signup:login' %}"  method="post">
+    <input type="button" class="stone-btn entry-close" value="&times;">
+    <br>
+    <input id="tel" name="username" class="stone-form-input" type="tel" required="required" placeholder="&nbsp;用户名" title="(请输入正确手机号码)" autocomplete="off">
+      <input type="text" name="phone_number" value="18957856792" style="visibility: hidden">
+    <input id="password" name="password" class="stone-form-input" type="password" required="required"
+      placeholder="&nbsp;密码">
+
+    <input id="verifyCode" name="verifyCode" class="stone-form-input" type="text" required="required"
+      placeholder="&nbsp;验证码" title="验证码错误" autocomplete="off">
+    <input id="code" type="button" class="stone-btn entry-getcode ">
+
+    <br>
+    <button class="stone-btn plain entry-sub" type="submit">登&nbsp;录</button> <i>&nbsp;<a href="{% url 'login_signup:register_page' %}"
+        style="color: rgba(255,255,255,0.5)"> 注册? </a>&nbsp;</i>
+  </form>
+</body>
+<script>
+  function Asubmit() {
+    var req = new XMLHttpRequest()
+    req.onreadystatechange = function () {
+      if (req.readyState == 4 && req.status == 200) {
+
+        var data = JSON.parse(req.responseText);
+
+        if(data.code == 1){
+          window.parent.location.reload();
+        }
+
+      }
+    }
+    req.withCredentials = true;
+    req.open('get', `http://localhost:3160/login?phoneNumber=${document.getElementById("tel").value}`);
+    req.send(null);
+    return false
+  }
+</script>
+<script src="{% static 'js/userEnry.js' %}"></script>
+</html>

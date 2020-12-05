@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edmin</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'views/bootstrap/css/bootstrap.min.css' %}">
+    <link type="text/css" href="{% static 'views/bootstrap/css/bootstrap-responsive.min.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'views/css/theme.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'views/images/icons/css/font-awesome.css' %}" rel="stylesheet">
+    <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600'
+        rel='stylesheet'>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <div class="content">
+                        <div class="btn-controls">
+                            <div class="btn-box-row row-fluid">
+                                <a href="#" class="btn-box big span4"><i class=" icon-random"></i><b>{{ skin }}</b>
+                                    <p class="text-muted">
+                                        今日浏览量</p>
+                                </a><a href="#" class="btn-box big span4"><i class="icon-user"></i><b>{{ users_num }}</b>
+                                    <p class="text-muted">
+                                        用户数</p>
+                                </a><a href="#" class="btn-box big span4"><i class="icon-comments"></i><b>{{ posts_num }}</b>
+                                    <p class="text-muted">
+                                        帖子数</p>
+                                </a>
+                            </div>
+                            <div class="btn-box-row row-fluid">
+                                <div class="span8">
+                                    <div class="row-fluid">
+                                        <div class="span12">
+                                            <a href="{% url 'backmanage:feedback' %}" class="btn-box small span4"><i class="icon-envelope"></i><b>反馈与建议</b>
+                                            </a><a href="{% url 'backmanage:user_manage' %}" class="btn-box small span4"><i class="icon-group"></i><b>用户管理</b>
+                                            </a><a href="{% url 'backmanage:system_state' %}" class="btn-box small span4"><i class="icon-exchange"></i><b>系统管理</b>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="row-fluid">
+                                        <div class="span12">
+                                            <a href="{% url 'backmanage:system_state' %}" class="btn-box small span4"><i class="icon-save"></i><b>运行日志</b>
+                                            </a><a href="{% url 'backmanage:forum_task' %}" class="btn-box small span4"><i class="icon-bullhorn"></i><b>社区公告</b>
+                                            </a><a href="{% url 'backmanage:guanyu' %}" class="btn-box small span4"><i class="icon-sort-down"></i><b>关于石村</b> </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul class="widget widget-usage unstyled span4">
+                                    <li>
+                                        <p>
+                                            <strong>Chrome</strong> <span class="pull-right small muted">78%</span>
+                                        </p>
+                                        <div class="progress tight">
+                                            <div class="bar" style="width: 78%;">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            <strong>360</strong> <span class="pull-right small muted">56%</span>
+                                        </p>
+                                        <div class="progress tight">
+                                            <div class="bar bar-success" style="width: 56%;">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            <strong>FireFox</strong> <span class="pull-right small muted">44%</span>
+                                        </p>
+                                        <div class="progress tight">
+                                            <div class="bar bar-warning" style="width: 44%;">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>
+                                            <strong>IE</strong> <span class="pull-right small muted">67%</span>
+                                        </p>
+                                        <div class="progress tight">
+                                            <div class="bar bar-danger" style="width: 67%;">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!--/#btn-controls-->
+                        <div class="module">
+                            <div class="module-head">
+                                <h3>
+                                    流量统计</h3>
+                            </div>
+                            <div class="module-body">
+                                <div class="chart inline-legend grid">
+                                    <div id="placeholder2" class="graph" style="height: 500px">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.module-->
+                        <div class="module hide">
+                            <div class="module-head">
+                                <h3>
+                                    Adjust Budget Range</h3>
+                            </div>
+                            <div class="module-body">
+                                <div class="form-inline clearfix">
+                                    <a href="#" class="btn pull-right">Update</a>
+                                    <label for="amount">
+                                        Price range:</label>
+                                    &nbsp;
+                                    <input type="text" id="amount" class="input-" />
+                                </div>
+                                <hr />
+                                <div class="slider-range">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="copyrights">Collect from <a href="###" title="web">web</a></div>
+                        <div class="module">
+                            <div class="module-head">
+                                <h3>
+                                    用户管理</h3>
+                            </div>
+                            <div class="module-body table">
+                                <table cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped	 display"
+                                    width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                用户昵称
+                                            </th>
+                                            <th>
+                                                手机号码
+                                            </th>
+                                            <th>
+                                                发帖数
+                                            </th>
+                                            <th>
+                                                是否为管理员
+                                            </th>
+                                            <th>
+                                                是否屏蔽
+                                            </th>
+                                            <th>
+                                                贡献度
+                                            </th>
+                                            <th style="width:200px!important;">
+                                                操作
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="rightClick">
+                                        {% for user in users %}
+                                        <tr class="odd gradeA">
+                                            <td>
+                                                {{ user.nickname }}
+                                            </td>
+                                            <td>
+                                                {{ user.phone_number }}
+                                            </td>
+                                            <td>
+                                                {{ user.posts_num }}
+                                            </td>
+                                            <td class="center">
+                                                {% if user.auth == 1 %}
+                                                是
+                                                {% else %}
+                                                否
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if user.forbid == 0 %}
+                                                否
+                                                {% else %}
+                                                是
+                                                {% endif %}
+                                            </td>
+                                            <td class="center">
+                                                {{ user.contribution }}
+                                            </td>
+                                            <td style="width:200px!important;">
+{#                                            {% if  user.identity == 1 %}#}
+{#                                                是#}
+{#                                                {% else %}#}
+{#                                                否#}
+{#                                                {% endif %}#}
+                                                {% if user.auth == 1 %}
+                                                <a href="{% url 'backmanage:remove_admin' user.id %}">解除管理</a>
+                                                {% else %}
+                                                <a href="{% url 'backmanage:set_admin' user.id %}">设为管理</a>
+                                                {% endif %}
+                                            {% if user.forbid == 0 %}
+                                            <a href="{% url 'backmanage:forbid_user' user.id %}">&nbsp;屏蔽用户</a>
+                                            {% else %}
+                                            <a href="{% url 'backmanage:forbid_user' user.id %}">&nbsp;解除屏蔽</a>
+                                            {% endif %}
+                                            <a href="{% url 'backmanage:reset_password' user.id %}">重置密码</a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+
+
+
+                                    </tbody>
+{#                                    <tfoot>#}
+{#                                        <tr>#}
+{#                                            <th>#}
+{#                                                用户昵称#}
+{#                                            </th>#}
+{#                                            <th>#}
+{#                                                简介#}
+{#                                            </th>#}
+{#                                            <th>#}
+{#                                                管理权限#}
+{#                                            </th>#}
+{#                                            <th>#}
+{#                                                石村人#}
+{#                                            </th>#}
+{#                                            <th>#}
+{#                                                最近登陆#}
+{#                                            </th>#}
+{#                                        </tr>#}
+{#                                    </tfoot>#}
+                                </table>
+                            </div>
+                        </div>
+                        <!--/.module-->
+                    </div>
+                    <!--/.content-->
+                </div>
+                <!--/.span9-->
+            </div>
+        </div>
+        <!--/.container-->
+    </div>
+    <!--/.wrapper-->
+    <!-- 右击菜单 -->
+    <script src="{% static 'views/scripts/jquery-1.9.1.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'views/scripts/jquery-ui-1.10.1.custom.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'views/bootstrap/js/bootstrap.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'views/scripts/flot/jquery.flot.js' %}" type="text/javascript"></script>
+    <script src="{% static 'views/scripts/flot/jquery.flot.resize.js' %}" type="text/javascript"></script>
+    <script src="{% static 'views/scripts/datatables/jquery.dataTables.js' %}" type="text/javascript"></script>
+    <script src="{% static 'views/scripts/common.js' %}" type="text/javascript"></script>
+    <script src="{% static 'views/scripts/jquery.contextify.js' %}"></script>
+{#    <script>#}
+{#		var options = {items:[#}
+{#		  {header: '管理'},#}
+{#		  {divider: true},#}
+{#		  {text: '第一个链接', href: 'http://www.jq22.com'},#}
+{#		  {text: '第二个链接', onclick: function() {alert("你点击了第2个链接")}},#}
+{#		  {text: '第三个链接', onclick: function() {alert("你点击了第3个链接")}},#}
+{#		  {text: '第四个链接', onclick: function() {alert("你点击了第4个链接")}}#}
+{#		]}#}
+{#		$('#rightClick').contextify(options);#}
+{#    </script>#}
+</body>
